@@ -11,7 +11,7 @@
     "start": "ts-node src/worker.ts",
     "start.watch": "nodemon src/worker.ts",
     "workflow": "ts-node src/client.ts",
-    "test": "mocha --exit --require ts-node/register --require source-map-support/register src/mocha/*.test.ts"
+    "test": "node node_modules/.bin/jest"
   },
   "nodemonConfig": {
     "execMap": {
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@temporalio/testing": "^1.11.6",
     "@tsconfig/node18": "^18.2.4",
+    "@types/jest": "^29.5.14",
     "@types/mocha": "8.x",
     "@types/node": "^22.9.1",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
@@ -39,9 +40,11 @@
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-deprecation": "^3.0.0",
+    "jest": "^29.7.0",
     "mocha": "8.x",
     "nodemon": "^3.1.7",
     "prettier": "^3.4.2",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }
