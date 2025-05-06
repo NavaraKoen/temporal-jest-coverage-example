@@ -12,7 +12,8 @@
     "start.watch": "nodemon src/worker.ts",
     "workflow": "ts-node src/client.ts",
     "test": "node node_modules/.bin/jest",
-    "test:mocha": "nyc  --reporter=html --reporter=text mocha --exit --require ts-node/register --require source-map-support/register src/mocha/*.test.ts --timeout 30000"
+    "test:mocha": "mocha --exit --require ts-node/register --require source-map-support/register src/mocha/*.test.ts --timeout 10000",
+    "test:mocha:coverage": "nyc --reporter=html --reporter=text mocha --exit --require ts-node/register --require source-map-support/register src/mocha/*.test.ts --timeout 10000"
   },
   "nodemonConfig": {
     "execMap": {
