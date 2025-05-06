@@ -12,14 +12,14 @@ describe('Example workflow', () => {
   let testEnv: TestWorkflowEnvironment;
 
   beforeEach(async () => {
-    testEnv = await TestWorkflowEnvironment.createLocal();
+    testEnv = await TestWorkflowEnvironment.createTimeSkipping();
   });
 
   afterEach(async () => {
     await testEnv?.teardown();
   });
 
-  it('successfully completes the Workflow', async () => {
+  const runTest = async (args: Parameters<typeof example>, workflowId = 'test') => {
     const { client, nativeConnection } = testEnv;
     const taskQueue = 'test';
 
@@ -32,14 +32,23 @@ describe('Example workflow', () => {
       }),
     );
 
-    const result = await worker.runUntil(
+    return worker.runUntil(
       client.workflow.execute(example, {
-        args: ['Temporal'],
-        workflowId: 'test',
+        args,
+        workflowId,
         taskQueue,
       }),
     );
+  };
+
+  it('successfully completes the Workflow with Temporal input', async () => {
+    const result = await runTest(['Temporal']);
     assert.equal(result, 'Hello, Temporal!');
+  });
+
+  it('successfully completes the Workflow with a different input', async () => {
+    const result = await runTest(['Not temporal']);
+    assert.equal(result, 'Hello, Not temporal!');
   });
 });
 
